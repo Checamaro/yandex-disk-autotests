@@ -25,6 +25,7 @@ jobs:
 
       - name: Run API tests with pytest and generate Allure results
         run: |
+          echo "YANDEX_TOKEN=${{ secrets.YANDEX_TOKEN }}" > .env
           pytest --alluredir=allure-results
 
       - name: Upload Allure results as artifact

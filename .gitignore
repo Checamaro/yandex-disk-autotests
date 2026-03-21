@@ -16,3 +16,7 @@ __pycache__/
 # Allure
 allure-results/
 allure-report/
+
+# Environment files
+.env
+*.env
