@@ -1,2 +1,0 @@
-INFO     api_tests:event_hooks.py:10 PUT https://cloud-api.yandex.net/v1/disk/resources?path=test_folder_408
-INFO     api_tests:event_hooks.py:10 DELETE https://cloud-api.yandex.net/v1/disk/resources?path=test_folder_408
