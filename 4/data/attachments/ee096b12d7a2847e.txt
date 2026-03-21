@@ -1,1 +1,0 @@
-INFO     api_tests:event_hooks.py:10 GET https://cloud-api.yandex.net/v1/disk

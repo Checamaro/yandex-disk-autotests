@@ -1,0 +1,2 @@
+INFO     api_tests:event_hooks.py:14 PUT https://cloud-api.yandex.net/v1/disk/resources?path=existing_folder
+INFO     api_tests:event_hooks.py:14 PUT https://cloud-api.yandex.net/v1/disk/resources?path=existing_folder
