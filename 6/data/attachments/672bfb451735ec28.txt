@@ -1,0 +1,1 @@
+INFO     api_tests:event_hooks.py:14 PUT https://cloud-api.yandex.net/v1/disk/resources?path=test_folder_7997
