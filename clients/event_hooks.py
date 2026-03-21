@@ -6,8 +6,8 @@ from tools.logger import get_logger
 logger = get_logger()
 
 
-def mask_token(text: str) -> str:
-    return re.sub(r'OAuth\s+\w+', 'OAuth [MASKED]', text)
+def mask_token(response_text):
+    return re.sub(r'OAuth\s+[^\s\'"]+', 'OAuth [MASKED]', response_text)
 
 
 def log_request(request):
@@ -26,7 +26,7 @@ def log_request(request):
 def log_response(response, *args, **kwargs):
     import json
     status_line = f"[{response.status_code}] {response.request.method} {response.url}"
-    print(mask_token(status_line))  # <-- маскируем токен в логах
+    print(mask_token(status_line))
 
     try:
         body = json.dumps(response.json(), indent=2, ensure_ascii=False)
