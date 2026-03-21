@@ -49,12 +49,17 @@ jobs:
           name: allure-results
           path: allure-results
 
-      - name: Generate Allure Report
-        run: |
-          allure generate allure-results -o allure-report --clean
+      - name: Generate Allure Report with history
+        uses: simple-elf/allure-report-action@v1.13
+        if: always()
+        with:
+          allure_results: allure-results
+          allure_history: allure-history
+          keep_reports: 20
 
       - name: Deploy report to Github Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: allure-report
+          publish_branch: gh-pages
+          publish_dir: allure-history
