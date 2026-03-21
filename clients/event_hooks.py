@@ -2,20 +2,23 @@ import allure
 import logging, re
 from tools.http.curl import to_curl
 from tools.logger import get_logger
+import json
 
 logger = get_logger()
 
 
-def mask_token(response_text):
-    return re.sub(r'OAuth\s+[^\s\'"]+', 'OAuth [MASKED]', response_text)
+def mask_token(text: str) -> str:
+    return re.sub(r'OAuth\s+[^\s\'"]+', 'OAuth [MASKED]', text)
 
 
 def log_request(request):
-    logger.info(f"{request.method} {request.url}")
+    if 'Authorization' in request.headers:
+        request.headers['Authorization'] = 'OAuth [MASKED]'
 
     curl = to_curl(request)
     curl = mask_token(curl)
 
+    logger.info(curl)
     allure.attach(
         curl,
         name="curl",
@@ -24,7 +27,6 @@ def log_request(request):
 
 
 def log_response(response, *args, **kwargs):
-    import json
     status_line = f"[{response.status_code}] {response.request.method} {response.url}"
     print(mask_token(status_line))
 
