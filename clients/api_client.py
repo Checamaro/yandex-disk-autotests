@@ -1,35 +1,25 @@
-import requests
 import allure
+import requests
 
-from config import BASE_URL, TOKEN, TIMEOUT
-from clients.event_hooks import log_request, log_response
-from tools.allure.attachments import (
-    attach_request,
-    attach_response
-)
+from tools.allure.attachments import attach_request, attach_response
+from clients.http_builder import get_http_client
+from clients.event_hooks import log_request
 
 
 class ApiClient:
 
-    def __init__(self):
-        self.session = requests.Session()
+    def __init__(self, session: requests.Session | None = None):
+        self.session = session or get_http_client()
 
-        self.session.headers.update({
-            "Authorization": f"OAuth {TOKEN}",
-            "Accept": "application/json"
-        })
-
-        self.session.hooks = {"response": [log_response]}
-
-    def _request(self, method, url, params=None):
-        full_url = BASE_URL + url
+    def _request(self, method: str, url: str, **kwargs):
+        full_url = self.session.base_url + url
 
         with allure.step(f"{method.upper()} {url}"):
             r = self.session.request(
                 method,
                 full_url,
-                params=params,
-                timeout=TIMEOUT
+                timeout=self.session.timeout,
+                **kwargs
             )
 
             log_request(r.request)
@@ -39,14 +29,17 @@ class ApiClient:
 
             return r
 
-    def get(self, url, params=None):
-        return self._request("GET", url, params)
+    def get(self, url, **kwargs):
+        return self._request("GET", url, **kwargs)
 
-    def post(self, url, params=None):
-        return self._request("POST", url, params)
+    def post(self, url, **kwargs):
+        return self._request("POST", url, **kwargs)
 
-    def put(self, url, params=None):
-        return self._request("PUT", url, params)
+    def put(self, url, **kwargs):
+        return self._request("PUT", url, **kwargs)
 
-    def delete(self, url, params=None):
-        return self._request("DELETE", url, params)
+    def patch(self, url, **kwargs):
+        return self._request("PATCH", url, **kwargs)
+
+    def delete(self, url, **kwargs):
+        return self._request("DELETE", url, **kwargs)
