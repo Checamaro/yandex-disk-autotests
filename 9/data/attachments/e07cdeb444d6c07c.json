@@ -1,0 +1,4 @@
+{
+  "status_code": 409,
+  "body": "{\n  \"error\": \"DiskPathPointsToExistentDirectoryError\",\n  \"description\": \"Specified path \\\"existing_folder\\\" points to existent directory.\",\n  \"message\": \"По указанному пути \\\"existing_folder\\\" уже существует папка с таким именем.\"\n}"
+}
