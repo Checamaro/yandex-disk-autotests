@@ -90,14 +90,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Загружаем историю предыдущего отчета (если есть)
-      - name: Load Allure history
-        uses: actions/download-artifact@v4
-        with:
-          name: allure-history
-          path: allure-history
-        continue-on-error: true
-
       - name: Run API tests with pytest and generate Allure results
         run: |
           echo "YANDEX_TOKEN=${{ secrets.YANDEX_TOKEN }}" > .env
@@ -125,30 +117,34 @@ jobs:
           name: allure-results
           path: allure-results
 
-      # Загружаем историю предыдущего отчета (если есть)
-      - name: Load Allure history
-        uses: actions/download-artifact@v4
-        with:
-          name: allure-history
-          path: allure-history
+      # КЛЮЧЕВОЙ МОМЕНТ: получаем историю из ветки gh-pages
+      - name: Get Allure history from gh-pages
+        uses: actions/checkout@v4
+        if: always()
         continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
 
-      - name: Generate Allure Report with history
+      - name: Generates Allure Report with history
         uses: simple-elf/allure-report-action@v1.13
         if: always()
         with:
           allure_results: allure-results
-          allure_history: allure-history
+          # Если есть история из gh-pages, используем её
+          allure_history: gh-pages/history
           keep_reports: 20
 
       # Сохраняем историю для следующего запуска
-      - name: Upload Allure history
-        uses: actions/upload-artifact@v4
+      - name: Save history for next run
         if: always()
-        with:
-          name: allure-history
-          path: allure-history
-          retention-days: 30
+        run: |
+          mkdir -p allure-history
+          cp -r allure-history/* allure-history/ || true
+          # Если есть история из gh-pages, копируем её
+          if [ -d "gh-pages/history" ]; then
+            cp -r gh-pages/history/* allure-history/ 2>/dev/null || true
+          fi
 
       - name: Deploy report to Github Pages
         uses: peaceiris/actions-gh-pages@v4
