@@ -1,4 +1,0 @@
-{
-  "status_code": 201,
-  "body": "{\n  \"method\": \"GET\",\n  \"href\": \"https://cloud-api.yandex.net/v1/disk/resources?path=disk%3A%2Ftest_folder_13\",\n  \"templated\": false\n}"
-}
