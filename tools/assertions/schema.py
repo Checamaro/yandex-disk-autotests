@@ -1,2 +1,2 @@
 def validate_schema(response, schema):
-    schema(**response.json())
+    schema.model_validate(response.json())

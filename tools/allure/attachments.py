@@ -37,22 +37,3 @@ def attach_response(response):
         name="response",
         attachment_type=allure.attachment_type.JSON
     )
-
-
-def attach_curl(request):
-    headers = " ".join(
-        f"-H '{k}: {v}'" for k, v in request.headers.items()
-    )
-
-    body = ""
-
-    if request.body:
-        body = f"-d '{request.body}'"
-
-    curl = f"curl -X {request.method} '{request.url}' {headers} {body}"
-
-    allure.attach(
-        curl,
-        name="curl",
-        attachment_type=allure.attachment_type.TEXT
-    )

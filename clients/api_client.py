@@ -12,22 +12,20 @@ class ApiClient:
         self.session = session or get_http_client()
 
     def _request(self, method: str, url: str, **kwargs):
-        full_url = self.session.base_url + url
-
         with allure.step(f"{method.upper()} {url}"):
-            r = self.session.request(
+            response = self.session.request(
                 method,
-                full_url,
+                self.session.base_url + url,
                 timeout=self.session.timeout,
                 **kwargs
             )
 
-            log_request(r.request)
+            log_request(response.request)
 
-            attach_request(r.request)
-            attach_response(r)
+            attach_request(response.request)
+            attach_response(response)
 
-            return r
+            return response
 
     def get(self, url, **kwargs):
         return self._request("GET", url, **kwargs)

@@ -4,8 +4,6 @@ pytest_plugins = [
 
     "fixtures.resources",
 
-    "fixtures.faker",
-
-    "fixtures.logger"
+    "fixtures.faker"
 
 ]

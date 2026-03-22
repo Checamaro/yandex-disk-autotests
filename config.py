@@ -5,4 +5,6 @@ load_dotenv()
 
 BASE_URL = "https://cloud-api.yandex.net"
 TOKEN = os.getenv("YANDEX_TOKEN")
+if not TOKEN:
+    raise RuntimeError("YANDEX_TOKEN is not set")
 TIMEOUT = 10

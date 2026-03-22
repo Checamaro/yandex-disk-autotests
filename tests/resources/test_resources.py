@@ -20,15 +20,12 @@ class TestResources:
     @pytest.mark.parametrize(
         "folder_name",
         [
-            lambda: random_folder(),
-            lambda: random_folder(),
+            random_folder(),
+            random_folder(),
         ]
     )
     def test_create_folder_positive(self, resources_client, folder_name):
         """Позитивное создание папки"""
-
-        if callable(folder_name):
-            folder_name = folder_name()
 
         r = resources_client.create_folder(folder_name)
 

@@ -27,14 +27,15 @@ def log_request(request):
 
 
 def log_response(response, *args, **kwargs):
-    status_line = f"[{response.status_code}] {response.request.method} {response.url}"
-    print(mask_token(status_line))
+    logger.info(f"Response status: {response.status_code}")
+    logger.info(f"Response url: {response.url}")
 
     try:
-        body = json.dumps(response.json(), indent=2, ensure_ascii=False)
-        print(mask_token(body))
+        body = response.json()
+        logger.info(f"Response body: {json.dumps(body, indent=2, ensure_ascii=False)}")
     except Exception:
-        print(mask_token(response.text))
+        logger.info(f"Response body: {response.text}")
+
     return response
 
 
