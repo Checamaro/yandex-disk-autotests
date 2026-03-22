@@ -1,1 +1,0 @@
-curl -X PUT 'https://cloud-api.yandex.net/v1/disk/resources?path=test_folder_3223' -H 'User-Agent: python-requests/2.32.5' -H 'Accept-Encoding: gzip, deflate' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'Authorization: OAuth [MASKED]' -H 'Content-Length: 0'
