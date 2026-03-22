@@ -1,0 +1,13 @@
+{
+  "method": "POST",
+  "url": "https://cloud-api.yandex.net/v1/disk/resources/upload?path=test_folder_3223&url=http%3A%2F%2Fexample.com",
+  "headers": {
+    "User-Agent": "python-requests/2.32.5",
+    "Accept-Encoding": "gzip, deflate",
+    "Accept": "application/json",
+    "Connection": "keep-alive",
+    "Authorization": "OAuth [MASKED]",
+    "Content-Length": "0"
+  },
+  "body": null
+}

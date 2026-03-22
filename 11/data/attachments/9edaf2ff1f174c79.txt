@@ -1,0 +1,1 @@
+curl -X POST 'https://cloud-api.yandex.net/v1/disk/resources/upload?path=test_folder_3223&url=http%3A%2F%2Fexample.com' -H 'User-Agent: python-requests/2.32.5' -H 'Accept-Encoding: gzip, deflate' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'Authorization: OAuth [MASKED]' -H 'Content-Length: 0'
