@@ -1,70 +1,3 @@
-#name: API tests
-#
-#on:
-#  push:
-#    branches: [main]
-#  pull_request:
-#    branches: [main]
-#
-#jobs:
-#  run-tests:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Check out repository
-#        uses: actions/checkout@v5
-#
-#      - name: Set up Python
-#        uses: actions/setup-python@v6
-#        with:
-#          python-version: '3.12'
-#
-#      - name: Install dependencies
-#        run: |
-#          python -m pip install --upgrade pip
-#          pip install -r requirements.txt
-#
-#      - name: Run API tests with pytest and generate Allure results
-#        run: |
-#          echo "YANDEX_TOKEN=${{ secrets.YANDEX_TOKEN }}" > .env
-#          pytest --alluredir=allure-results
-#
-#      - name: Upload Allure results as artifact
-#        uses: actions/upload-artifact@v4
-#        if: always()
-#        with:
-#          name: allure-results
-#          path: allure-results
-#          retention-days: 7
-#
-#  publish-report:
-#    needs: run-tests
-#    runs-on: ubuntu-latest
-#    if: always()
-#    steps:
-#      - name: Check out repository
-#        uses: actions/checkout@v5
-#
-#      - name: Download Allure results artifact
-#        uses: actions/download-artifact@v4
-#        with:
-#          name: allure-results
-#          path: allure-results
-#
-#      - name: Generate Allure Report with history
-#        uses: simple-elf/allure-report-action@v1.13
-#        if: always()
-#        with:
-#          allure_results: allure-results
-#          allure_history: allure-history
-#          keep_reports: 20
-#
-#      - name: Deploy report to Github Pages
-#        uses: peaceiris/actions-gh-pages@v4
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          publish_branch: gh-pages
-#          publish_dir: allure-history
-
 name: API tests
 
 on:
@@ -117,34 +50,13 @@ jobs:
           name: allure-results
           path: allure-results
 
-      # КЛЮЧЕВОЙ МОМЕНТ: получаем историю из ветки gh-pages
-      - name: Get Allure history from gh-pages
-        uses: actions/checkout@v4
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
-
-      - name: Generates Allure Report with history
+      - name: Generate Allure Report with history
         uses: simple-elf/allure-report-action@v1.13
         if: always()
         with:
           allure_results: allure-results
-          # Если есть история из gh-pages, используем её
-          allure_history: gh-pages/history
+          allure_history: allure-history
           keep_reports: 20
-
-      # Сохраняем историю для следующего запуска
-      - name: Save history for next run
-        if: always()
-        run: |
-          mkdir -p allure-history
-          cp -r allure-history/* allure-history/ || true
-          # Если есть история из gh-pages, копируем её
-          if [ -d "gh-pages/history" ]; then
-            cp -r gh-pages/history/* allure-history/ 2>/dev/null || true
-          fi
 
       - name: Deploy report to Github Pages
         uses: peaceiris/actions-gh-pages@v4
