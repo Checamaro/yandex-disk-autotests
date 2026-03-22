@@ -6,13 +6,4 @@ class DiskInfo(BaseModel):
     used_space: int
 
 
-class ResourceResponse(BaseModel):
-    path: str
-    name: str
-    type: str
 
-
-class OperationResponse(BaseModel):
-    method: str
-    href: str
-    templated: bool
