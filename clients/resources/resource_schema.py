@@ -1,13 +1,13 @@
 from pydantic import BaseModel
 
 
-class ResourceResponse(BaseModel):
+class ResourceResponseSchema(BaseModel):
     path: str
     name: str
     type: str
 
 
-class OperationResponse(BaseModel):
+class OperationResponseSchema(BaseModel):
     method: str
     href: str
     templated: bool

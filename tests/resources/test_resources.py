@@ -3,7 +3,7 @@ import allure
 
 from tools.assertions.resources import ResourcesAssertions
 from tools.fakers import random_folder
-from clients.errors_schema import ErrorResponse
+from clients.errors_schema import ErrorResponseSchema
 from allure_commons.types import Severity
 
 
@@ -56,7 +56,7 @@ class TestResources:
         assert r.status_code == expected_status
 
         if r.status_code != 201:
-            ErrorResponse(**r.json())
+            ErrorResponseSchema(**r.json())
 
     @allure.story("Get resource")
     @allure.title("Get folder metadata")
