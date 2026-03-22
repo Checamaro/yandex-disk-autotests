@@ -1,4 +1,0 @@
-{
-  "status_code": 200,
-  "body": "{\n  \"path\": \"disk:/test_folder_8900\",\n  \"type\": \"dir\",\n  \"name\": \"test_folder_8900\",\n  \"created\": \"2026-03-22T12:44:01+00:00\",\n  \"modified\": \"2026-03-22T12:44:01+00:00\",\n  \"_embedded\": {\n    \"path\": \"disk:/test_folder_8900\",\n    \"limit\": 20,\n    \"offset\": 0,\n    \"sort\": \"\",\n    \"total\": 0,\n    \"items\": []\n  },\n  \"resource_id\": \"2078624811:eb577329fdf0d76f70d8b1612528fae2a0486e5b561cdb69936e804f30d6aa83\",\n  \"revision\": 1774183441558216,\n  \"comment_ids\": {\n    \"public_resource\": \"2078624811:eb577329fdf0d76f70d8b1612528fae2a0486e5b561cdb69936e804f30d6aa83\",\n    \"private_resource\": \"2078624811:eb577329fdf0d76f70d8b1612528fae2a0486e5b561cdb69936e804f30d6aa83\"\n  },\n  \"exif\": {}\n}"
-}
