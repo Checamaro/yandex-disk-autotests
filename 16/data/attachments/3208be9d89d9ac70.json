@@ -1,0 +1,4 @@
+{
+  "status_code": 400,
+  "body": "{\n  \"error\": \"FieldValidationError\",\n  \"description\": \"Error validating field \\\"path\\\": This field is required.\",\n  \"message\": \"Ошибка проверки поля \\\"path\\\": Это поле является обязательным.\"\n}"
+}
