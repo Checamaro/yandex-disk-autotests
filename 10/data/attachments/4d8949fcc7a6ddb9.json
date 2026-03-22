@@ -1,0 +1,13 @@
+{
+  "method": "DELETE",
+  "url": "https://cloud-api.yandex.net/v1/disk/resources?path=test_folder_1572",
+  "headers": {
+    "User-Agent": "python-requests/2.32.5",
+    "Accept-Encoding": "gzip, deflate",
+    "Accept": "application/json",
+    "Connection": "keep-alive",
+    "Authorization": "OAuth [MASKED]",
+    "Content-Length": "0"
+  },
+  "body": null
+}
