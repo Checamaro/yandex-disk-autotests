@@ -1,4 +1,0 @@
-{
-  "status_code": 404,
-  "body": "{\n  \"error\": \"DiskNotFoundError\",\n  \"description\": \"Resource not found.\",\n  \"message\": \"Не удалось найти запрошенный ресурс.\"\n}"
-}
